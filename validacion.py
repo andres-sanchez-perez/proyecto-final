@@ -3,7 +3,7 @@ while True:
     opcion3=str(input("ingrese una opcion:"))
     if(opcion3.isdigit()==True):
         opcion3_int=int(opcion3)
-        if(opcion3>0):
+        if(opcion3_int>0):
             break
         else:
             print("ingrese una opcion valida")
