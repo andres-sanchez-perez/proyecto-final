@@ -9,3 +9,5 @@ while True:
             print("ingrese una opcion valida")
             wait_for("presione una tecla para continuar")
             os.system("clear")
+           
+## el .isdigit(), verifica si el string es numerico, .isalpha() verifica si el string es alfabetico.##
