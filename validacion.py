@@ -1,0 +1,11 @@
+while True:
+    print("menu\n1 para ingresar nueva ficha\n2 para buscar una ficha medica\n")
+    opcion3=str(input("ingrese una opcion:"))
+    if(opcion3.isdigit()==True):
+        if(opcion3>0):
+            opcion3_int=int(opcion3)
+            break
+        else:
+            print("ingrese una opcion valida")
+            wait_for("presione una tecla para continuar")
+            os.system("clear")
