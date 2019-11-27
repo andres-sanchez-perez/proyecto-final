@@ -47,7 +47,7 @@ def ingresomatrizpacientes():
                 print("ingrese una opcion valida")
                 pause()
                 os.system("cls")
-                ##el "cls" es para usar en windows, "clear para UNIX, es decir linux y onlinegdb##
+                ##el "cls" es para usar en windows, "clear" para UNIX, es decir linux y onlinegdb##
             
             
         if(opcion3_int==1):
