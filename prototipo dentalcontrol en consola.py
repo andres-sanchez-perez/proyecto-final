@@ -1,25 +1,6 @@
 import calendar
 import sys
-import termios
 import os
-
-def wait_for(mess, *keys):
-    file_descriptor = sys.stdin.fileno()
-    old = termios.tcgetattr(file_descriptor)
-    new = old[:]
-
-    try:
-        new[3] &= ~(termios.ICANON | termios.ECHO)
-        termios.tcsetattr(file_descriptor, termios.TCSADRAIN, new)
-        print(mess, end="")
-        while True:
-            letra = sys.stdin.read(1)
-            if not keys or letra in keys:
-                print()
-                break
-    finally:
-        termios.tcsetattr(file_descriptor, termios.TCSADRAIN, old)
-
 
 def paciente(opcion):
     ingresomatrizpacientes()
@@ -51,7 +32,7 @@ def calendario(opcion):
     F=int(input("ingrese el mes que quiere mostrar"))
     cal = calendar.month(2020, F)
     print ("Aquí está el calendario:", cal)
-    wait_for("Presione una tecla para continuar")
+    pause()
 
 def ingresomatrizpacientes():
     while True:
@@ -64,8 +45,9 @@ def ingresomatrizpacientes():
                     break
             else:
                 print("ingrese una opcion valida")
-                wait_for("presione una tecla para continuar")
-                os.system("clear")
+                pause()
+                os.system("cls")
+                ##el "cls" es para usar en windows, "clear para UNIX, es decir linux y onlinegdb##
             
             
         if(opcion3_int==1):
@@ -95,7 +77,7 @@ def ingresomatrizpacientes():
                                     break
                             else:
                                 print("ingrese una cedula valida")
-                                wait_for("presione una tecla para continuar")
+                                pause()
                                 os.system("clear")
                     if(s==5):
                         q="un diagnostico"
@@ -168,7 +150,7 @@ def matrizfactura():
     print("El valor del IVA es:",IVA)
     total=subtotal+IVA
     print("el costo total de los procedimientos es:",total)
-    wait_for("Presione una tecla para continuar")
+    pause()
     
 def validacionalfabetica(dato,nombre):
     while True:
@@ -176,11 +158,14 @@ def validacionalfabetica(dato,nombre):
             break
         else:
             print("ingrese",nombre,"valido")
-            wait_for("presione una tecla para continuar")
-            os.system("clear")
+            pause()
+            os.system("cls")
         dato=str(input("vuelva a ingresar aqui:"))
     return dato
-
+##lo siguiente es el presione enter para continuar sin tener que usar la libreria termios, ya que esta libreria solo existe en UNIX,linux y onlinegdb##
+def pause():
+    pause=input("presione enter para continuar")
+    
 while True:
     print("menu principal\n1 para pacientes\n2 para inventario\n3 para facturacion\n4 para calendario\n5 para salir\n")
     opcion=int(input("ingrese su opcion:"))
