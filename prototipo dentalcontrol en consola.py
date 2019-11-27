@@ -1,6 +1,7 @@
 import calendar
 import sys
 import termios
+import os
 
 def wait_for(mess, *keys):
     file_descriptor = sys.stdin.fileno()
@@ -58,8 +59,8 @@ def ingresomatrizpacientes():
             print("menu\ningrese 1 para ingresar nueva ficha\ningrese 2 para buscar una ficha medica\ningrese 3 para volver al menu principal")
             opcion3=str(input("ingrese una opcion:"))
             if(opcion3.isdigit()==True):
-                if(opcion3>0):
-                    opcion3_int=int(opcion3)
+                opcion3_int=int(opcion3)
+                if(opcion3_int>0):
                     break
             else:
                 print("ingrese una opcion valida")
@@ -76,17 +77,34 @@ def ingresomatrizpacientes():
                 a.append([])
                 for j in range(m):
                     if(s==1):
+                        q="un nombre"
                         p=str(input("ingrese el nombre del paciente:"))
+                        p=validacionalfabetica(p,q)
                     if(s==2):
+                        q="una edad"
                         p=int(input("ingrese la edad del paciente:"))
                     if(s==3):
+                        q="un genero"
                         p=str(input("ingrese el genero del paciente:"))
+                        p=validacionalfabetica(p,q)
                     if(s==4):
-                        p=int(input("ingrese la cedula del paciente:"))
+                        while True:
+                            p=str(input("ingrese la cedula del paciente:"))
+                            if(p.isdigit()==True):
+                                if(len(p)==10):
+                                    break
+                            else:
+                                print("ingrese una cedula valida")
+                                wait_for("presione una tecla para continuar")
+                                os.system("clear")
                     if(s==5):
+                        q="un diagnostico"
                         p=str(input("ingrese el diagnostico del paciente:"))
+                        p=validacionalfabetica(p,q)
                     if(s==6):
+                        q="un tratamiento"
                         p=str(input("ingrese el tratamiento a seguir:"))
+                        p=validacionalfabetica(p,q)
                     a[i].append(p)
                     s=s+1
                 print(a)
@@ -152,7 +170,16 @@ def matrizfactura():
     print("el costo total de los procedimientos es:",total)
     wait_for("Presione una tecla para continuar")
     
-
+def validacionalfabetica(dato,nombre):
+    while True:
+        if(dato.isalpha()==True):
+            break
+        else:
+            print("ingrese",nombre,"valido")
+            wait_for("presione una tecla para continuar")
+            os.system("clear")
+        dato=str(input("vuelva a ingresar aqui:"))
+    return dato
 
 while True:
     print("menu principal\n1 para pacientes\n2 para inventario\n3 para facturacion\n4 para calendario\n5 para salir\n")
@@ -171,4 +198,3 @@ while True:
         
     if(opcion>=5):
         break
-
