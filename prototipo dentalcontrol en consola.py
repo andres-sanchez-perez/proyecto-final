@@ -35,7 +35,7 @@ def ingresomatrizpacientes():
             else:
                 print("ingrese una opcion valida")
                 pause()
-                os.system("clear")
+                os.system("cls")
             
             
         if(opcion3_int==1):
@@ -75,7 +75,8 @@ def ingresomatrizpacientes():
                 print(a)
                 pause()
                 print("si quiere ingresar otra ficha presiones cualquier boton\ncaso contrario presione 1")
-                desicion=int(input("ingrese su desicion aquí:"))
+                q="desicion aqui:"
+                desicion=validacionnumerica(q)
                 if(desicion==1):
                     break
 
@@ -93,7 +94,7 @@ def ingresoelemento():
             else:
                 print("ingrese una opcion valida")
                 pause()
-                os.system("clear")
+                os.system("cls")
         if(opcion4_int==1):
             n=10
             m=4
@@ -103,20 +104,24 @@ def ingresoelemento():
                 a.append([])
                 for j in range(m):
                     if (s==1):
-                        p=int(input("ingrese el numero identificador del producto que ingresara:"))
+                        q="el identificador del producto:"
+                        p=validacionnumerica(q)
                     if (s==2):
-                        p=str(input("ingrese el nombre del producto que ingresara:"))
+                        q="el nombre del prodcuto:"
+                        p=validacionalfabetica(q)
                     if (s==3):
-                        p=str(input("ingrese el tipo de producto que ingresara:"))
+                        q="el tipo de producto:"
+                        p=validacionalfabetica
                     if (s==4):
-                        p=int(input("ingrese la cantidad del producto que tiene:"))
+                        q="cantidad de producto que tiene:"
+                        p=validacionnumerica(q)
                     a[i].append(p)
                     s=s+1
                 print(a)
                 pause()
-                s=1
                 print("si quiere ingresar otro producto presione cualquier tecla\ncaso contrario presione 1")
-                desicion=int(input("ingrese su desicion aqui:"))
+                q="desicion aqui:"
+                desicion=validacionnumerica(q)
                 if(desicion==1):
                     break
 def matrizfactura():
@@ -139,7 +144,8 @@ def matrizfactura():
         pause()
         s=1    
         print("¿Desea ingresar otro procediemiento?\nen caso de serlo presione cualquier boton\ncaso contrario presione 1")
-        desicion=int(input("ingrese su desicion:"))
+        q="desicion aqui:"
+        desicion=validacionnumerica(q)
         if(desicion==1):
             break
     print(a)
@@ -158,9 +164,9 @@ def validacionalfabetica(nombre):
         if(dato.isalpha()==True):
             break
         else:
-            print("ingrese",nombre,"valido")
+            print("ingrese un dato valido")
             pause()
-            os.system("clear")
+            os.system("cls")
     return dato
 
 def validacionnumerica(nombre):
@@ -172,9 +178,9 @@ def validacionnumerica(nombre):
             if(dato_int>0):
                 break
         else:
-            print("ingrese",nombre,"valido")
+            print("ingrese un dato valido")
             pause()
-            os.system("clear")
+            os.system("cls")
     return dato_int
 
 def pause():
@@ -197,5 +203,3 @@ while True:
         
     if(opcion>=5):
         break
-
-
