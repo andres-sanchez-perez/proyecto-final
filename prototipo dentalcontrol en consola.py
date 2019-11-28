@@ -189,19 +189,29 @@ def pause():
     pause=input("presione enter para continuar")##lo siguiente es el presione enter para continuar sin tener que usar la libreria termios, ya que esta libreria solo existe en UNIX,linux y onlinegdb##
 
 while True:
-    print("menu principal\n1 para pacientes\n2 para inventario\n3 para facturacion\n4 para calendario\n5 para salir\n")
-    opcion=int(input("ingrese su opcion:"))
-    if (opcion==1):
-        paciente(opcion)
+    while True:
+        print("menu principal\n1 para pacientes\n2 para inventario\n3 para facturacion\n4 para calendario\n5 para salir\n")
+        opcion=input("ingrese su opcion:")
+        if(opcion.isdigit()==True):
+            opcion_int=int(opcion)
+            if(opcion_int>0):
+                break
+        else:
+            print("ingrese un dato valido")
+            pause()
+            os.system("cls")
+            
+    if (opcion_int==1):
+        paciente(opcion_int)
     
-    elif (opcion==2):
-        inventario(opcion)
+    elif (opcion_int==2):
+        inventario(opcion_int)
         
-    elif (opcion==3):
-        facturacion(opcion)
+    elif (opcion_int==3):
+        facturacion(opcion_int)
         
-    elif (opcion==4):
-        calendario(opcion)
+    elif (opcion_int==4):
+        calendario(opcion_int)
         
-    if(opcion>=5):
+    if(opcion_int>=5):
         break
