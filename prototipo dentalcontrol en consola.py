@@ -134,9 +134,11 @@ def matrizfactura():
         a.append([])
         for j in range(m):
             if (s==1):
-                p=str(input("ingrese procedimiento hecho:"))
+                q="el procedimiento hecho"
+                p=validacionalfabetica(q)
             elif(s==2):
-                p=int(input("ingrese el valor del procedimiento:"))
+                q="el valor del procedimiento"
+                p=validacionnumerica(q)
                 acu=acu+p
             a[i].append(p)
             s=s+1 
