@@ -10,12 +10,20 @@ def inventario(opcion):
         
 def facturacion(opcion):
     while True:
-        print("menu\n1 para crear nueva factura\n2 para volver al menu principal")
-        opcion4=int(input("ingrese su opcion:"))
-        if (opcion4==1):
+        while True: 
+            print("menu\n1 para crear nueva factura\n2 para volver al menu principal")         
+            opcion5=input("ingrese su opcion:")
+            if(opcion5.isdigit()==True):
+                opcion5_int=int(opcion5)
+                if(opcion5_int>0):
+                    break
+        if (opcion5_int==1):
             matrizfactura()
-        else:
+        elif(opcion_5==2):
             break
+        else:
+            print("ingrese una opcion valida")
+            pause()
 
 def calendario(opcion):
     F=int(input("ingrese el mes que quiere mostrar"))
@@ -56,15 +64,7 @@ def ingresomatrizpacientes():
                         q="un genero"
                         p=validacionalfabetica(q)
                     if(s==4):
-                        while True:
-                            p=str(input("ingrese la cedula del paciente:"))
-                            if(p.isdigit()==True):
-                                if(len(p)==10):
-                                    break
-                            else:
-                                print("ingrese una cedula valida")
-                                wait_for("presione una tecla para continuar")
-                                os.system("clear")
+                        p=validacioncedula()
                     if(s==5):
                         q="un diagnostico"
                         p=validacionalfabetica(q)
@@ -184,6 +184,20 @@ def validacionnumerica(nombre):
             pause()
             os.system("cls")
     return dato_int
+
+def validacioncedula():
+    while True:
+        dato=str(input("ingrese la cedula del paciente:"))
+        if(dato.isdigit()==True):
+            if(len(dato)==10):
+                break
+            else:
+                print("ingrese una cedula de 10 digitos")
+        else:
+            print("ingrese una cedula valida")
+            pause()
+            os.system("cls")
+    return dato
 
 def pause():
     pause=input("presione enter para continuar")##lo siguiente es el presione enter para continuar sin tener que usar la libreria termios, ya que esta libreria solo existe en UNIX,linux y onlinegdb##
