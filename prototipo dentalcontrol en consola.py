@@ -2,6 +2,7 @@ import calendar
 import sys
 import os
 
+
 def paciente(opcion):
     ingresomatrizpacientes()
 
@@ -56,7 +57,10 @@ def ingresomatrizpacientes():
                 for j in range(m):
                     if(s==1):
                         q="un nombre"
-                        p=validacionalfabetica(q)
+                        g=validacionalfabetica(q)
+                        q="un apellido"
+                        x=validacionalfabetica(q)
+                        p=g+" "+x #--->esto concantena los strings, esto equivale a los comandos de: strcat(cad0," ");strcat(cad0,cad1);#
                     if(s==2):
                         q="una edad"
                         p=validacionnumerica(q)
@@ -562,4 +566,3 @@ while True:
         
     if(opcion_int>=5):
         break
-
