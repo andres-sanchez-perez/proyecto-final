@@ -3,13 +3,11 @@ import sys
 import os
 
 
-def paciente(opcion):
-    ingresomatrizpacientes()
 
 def inventario(opcion):
     ingresoelemento()
         
-def facturacion(opcion):
+def facturacion(opcion,a):
     while True:
         while True: 
             print("menu\n1 para crear nueva factura\n2 para volver al menu principal")         
@@ -19,8 +17,8 @@ def facturacion(opcion):
                 if(opcion5_int>0):
                     break
         if (opcion5_int==1):
-            matrizfactura()
-        elif(opcion_5==2):
+            matrizfactura(a)
+        elif(opcion5_int==2):
             break
         else:
             print("ingrese una opcion valida")
@@ -32,59 +30,22 @@ def calendario(opcion):
     print ("Aquí está el calendario:", cal)
     pause()
 
-def ingresomatrizpacientes():
+def ingresomatrizpacientes(a):
     while True:
         while True:
-            print("menu\ningrese 1 para ingresar nueva ficha\ningrese 2 para buscar una ficha medica\ningrese 3 para imprimir todas las fichas ingresadas\ningrese 4 para volver al menu principal")
+            print("menu\ningrese 1 para buscar una ficha medica\ningrese 2 para imprimir todas las fichas ingresadas\ningrese 3 para volver al menu principal")
             opcion3=str(input("ingrese una opcion:"))
             if(opcion3.isdigit()==True):
                 opcion3_int=int(opcion3)
                 if(opcion3_int>0):
-                    break
+                    if(opcion3_int<=3):
+                        break
             else:
                 print("ingrese una opcion valida")
                 pause()
                 os.system("cls")
             
-            
         if(opcion3_int==1):
-            n=10
-            m=6
-            s=1
-            a=[]
-            for i in range(n):
-                a.append([])
-                for j in range(m):
-                    if(s==1):
-                        q="un nombre"
-                        g=validacionalfabetica(q)
-                        q="un apellido"
-                        x=validacionalfabetica(q)
-                        p=g+" "+x #--->esto concantena los strings, esto equivale a los comandos de: strcat(cad0," ");strcat(cad0,cad1);#
-                    if(s==2):
-                        q="una edad"
-                        p=validacionnumerica(q)
-                    if(s==3):
-                        q="un genero"
-                        p=validacionalfabetica(q)
-                    if(s==4):
-                        p=validacioncedula()
-                    if(s==5):
-                        p=enfermedades()
-                    z=p
-                    if(s==6):
-                        p=tratamiento(z)
-                    a[i].append(p)
-                    s=s+1
-                print(a)
-                pause()
-                s=1
-                print("si quiere ingresar otra ficha presiones cualquier boton\ncaso contrario presione 1")
-                q="desicion"
-                desicion=validaciondesicion(q)
-                if(desicion==1):
-                    break
-        elif(opcion3_int==2):
             while True:
                 buscar=validacioncedula()
                 seguro=False
@@ -93,14 +54,15 @@ def ingresomatrizpacientes():
                         if(buscar==a[i][3]):
                            print(a[i])
                            while True:
-                               print("¿Que desea hacer con la ficha encontrada?\ningrese 1 para modificar dicha ficha\ningrese 2 para eliminarla\n")
+                               print("¿Que desea hacer con la ficha encontrada?\ningrese 1 para modificar dicha ficha\ningrese 2 para eliminarla\ningrese 3 cancelar")
                                opcion6=input("ingrese su desicion aqui:")
                                if(opcion6.isdigit()==True):
                                    opcion6_int=int(opcion6)
                                    if(opcion6_int>0):
-                                       break
+                                       if(opcion6_int<=3):
+                                           break
                                    else:
-                                       print("ingrese un numero positivo")
+                                       print("ingrese un numero entre 1 y 3")
                                else:
                                    print("ingrese una opcion valida")
                                    pause()
@@ -112,12 +74,17 @@ def ingresomatrizpacientes():
                                print(a[i])
                                pause()
                                seguro=True
+                               return a[i]
                                break
                            if(opcion6_int==2):
                                a.pop(i)
                                print(a)
                                pause()
                                seguro=True
+                               break
+                           if(opcion6_int==3):
+                               seguro=True
+                               return a[i]
                                break
                     if(seguro==True):
                         break        
@@ -127,15 +94,15 @@ def ingresomatrizpacientes():
                 if(desicion3==1):
                     break
                                         
-        elif(opcion3_int==3):
+        elif(opcion3_int==2):
             print(a)
             pause()
-        elif(opcion3_int==4):
+        elif(opcion3_int==3):
             break
         else:
             print("ingrese una de las opciones disponibles")
             pause()
-    
+    return (a)
         
 def ingresoelemento():
     while True:
@@ -237,32 +204,41 @@ def ingresoelemento():
             break
         else:
             print("ingrese una de las opciones disponibles")
-def matrizfactura():
+def matrizfactura(g):
     acu=0
-    n=10
     m=2
     s=1
     a=[]
-    for i in range(n):
-        a.append([])
-        for j in range(m):
-            if (s==1):
-                q="el procedimiento hecho"
-                p=validacionalfabetica(q)
-            elif(s==2):
-                q="el valor del procedimiento"
-                p=validacionnumerica(q)
-                acu=acu+p
-            a[i].append(p)
-            s=s+1 
-        print(a)
-        pause()
-        s=1    
-        print("¿Desea ingresar otro procediemiento?\nen caso de serlo presione cualquier boton\ncaso contrario presione 1")
-        q="desicion aqui:"
-        desicion=validacionnumerica(q)
-        if(desicion==1):
+    buscar=validacioncedula()
+    seguro=False
+    for i in range(len(g)):
+        for j in range(len(g[0])):
+            if(buscar==g[i][3]):
+                h=g[i][5]
+                seguro=True
+                break
+        if(seguro==True):
             break
+    for i in range(m):
+        if (s==1):
+            p=h
+        elif(s==2):
+            q="el valor del procedimiento en dolares"
+            z=validacionnumerica2(q)
+            while True:
+                v="el valor del procedimiento en centavos"
+                b=validacionnumerica2(v)/100
+                if(b>0):
+                    if(b<1):
+                        break
+                    else:
+                        print("ingrese un numero del 1 al 100")
+                else:
+                    print("ingrese un numero positivo")
+            p=z+b
+            acu=acu+p
+        a.append(p)
+        s=s+1 
     print(a)
     subtotal=acu
     print("el subtotal es:",subtotal)
@@ -553,16 +529,58 @@ while True:
             os.system("cls")
             
     if (opcion_int==1):
-        paciente(opcion_int)
-    
+        n=10
+        m=6
+        s=1
+        a=[]
+        for i in range(n):
+            a.append([])
+            for j in range(m):
+                if(s==1):
+                    q="un nombre"
+                    g=validacionalfabetica(q)
+                    q="un apellido"
+                    x=validacionalfabetica(q)
+                    p=g+" "+x #--->esto concantena los strings, esto equivale a los comandos de: strcat(cad0," ");strcat(cad0,cad1);#
+                if(s==2):
+                    q="una edad"
+                    p=validacionnumerica(q)
+                if(s==3):
+                    q="un genero"
+                    p=validacionalfabetica(q)
+                if(s==4):
+                    p=validacioncedula()
+                if(s==5):
+                    p=enfermedades()
+                z=p
+                if(s==6):
+                    p=tratamiento(z)
+                a[i].append(p)
+                s=s+1
+            print(a)
+            pause()
+            s=1
+            print("si quiere ingresar otra ficha presiones cualquier boton\ncaso contrario presione 1")
+            q="desicion"
+            desicion=validaciondesicion(q)
+            if(desicion==1):
+                break
+        A=a
     elif (opcion_int==2):
         inventario(opcion_int)
         
     elif (opcion_int==3):
-        facturacion(opcion_int)
-        
+        print("si quiere enviar las fichas que acabas de crear presiona 1\n si quieres enviar la matriz modificada presione 2\n")
+        q="desicion"
+        desicion=validaciondesicion(q)
+        if(desicion==1):
+            facturacion(opcion_int,A)
+        if(desicion==2):
+            p=ingresomatrizpacientes(A)
+            facturacion(opcion_int,p)
     elif (opcion_int==4):
         calendario(opcion_int)
         
     if(opcion_int>=5):
         break
+
