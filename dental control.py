@@ -109,6 +109,9 @@ def ingresoelemento():
                 opcion4_int=int(opcion4)
                 if(opcion4_int>0):
                     break
+                else:
+                    print("ingrese un numero mayor a 0")
+                    pause()
             else:
                 print("ingrese una opcion valida")
                 pause()
