@@ -1,6 +1,7 @@
 import calendar
 import sys
 import os
+from colorama import init,Fore, Back, Style
 
 def inventario(opcion):
     ingresoelemento()
@@ -14,12 +15,17 @@ def facturacion(opcion,A):
                 opcion5_int=int(opcion5)
                 if(opcion5_int>0):
                     break
+                else:
+                    init()
+                    print(Style.BRIGHT+Fore.RED+"ingrese un numero mayor a 0"+Style.RESET_ALL)
+                    pause()
         if (opcion5_int==1):
             matrizfactura(A)
         elif(opcion5_int==2):
             break
         else:
-            print("ingrese una opcion valida")
+            init()
+            print(Style.BRIGHT+Fore.RED+"ingrese una opcion valida"+Style.RESET_ALL)
             pause()
 
 def calendario(opcion):
@@ -28,78 +34,48 @@ def calendario(opcion):
     print ("Aquí está el calendario:", cal)
     pause()
 
-def ingresomatrizpacientes(a,cedula):
+def busquedaficha(a,cedula):
     while True:
-        while True:
-            print("menu\ningrese 1 para buscar una ficha medica\ningrese 2 para volver al menu principal")
-            opcion3=str(input("ingrese una opcion:"))
-            if(opcion3.isdigit()==True):
-                opcion3_int=int(opcion3)
-                if(opcion3_int>0):
-                    if(opcion3_int<=3):
-                        break
-            else:
-                print("ingrese una opcion valida")
-                pause()
-                os.system("cls")
-            
-        if(opcion3_int==1):
-            while True:
-                seguro=False
-                for i in range(len(a)):
-                    for j in range(len(a[0])):
-                        if(cedula==a[i][j-3]):
-                           print(a[i])
-                           while True:
-                               print("¿Que desea hacer con la ficha encontrada?\ningrese 1 para modificar dicha ficha\ningrese 2 para eliminarla\ningrese 3 cancelar")
-                               opcion6=input("ingrese su desicion aqui:")
-                               if(opcion6.isdigit()==True):
-                                   opcion6_int=int(opcion6)
-                                   if(opcion6_int>0):
-                                       if(opcion6_int<=3):
-                                           break
-                                   else:
-                                       print("ingrese un numero entre 1 y 3")
-                               else:
-                                   print("ingrese una opcion valida")
-                                   pause()
-                                   os.system("cls")
-                           if(opcion6_int==1):
-                               a[i][4]=enfermedades()
-                               k=a[i][4]
-                               a[i][5]=tratamiento(k)
-                               print(a[i])
-                               pause()
-                               seguro=True
-                           if(opcion6_int==2):
-                               a.pop(i)
-                               print(a)
-                               pause()
-                               seguro=True
-                               break
-                           if(opcion6_int==3):
-                               seguro=True
-                               break
-                    if(seguro==True):
-                        break
-                print("¿Desea volver a buscar una ficha?\ningrese cualquier numero para volver a buscar\ncaso contrario presione 1")
-                q="desicion"
-                desicion3=validaciondesicion(q)
-                if(desicion3==1):
-                    return a
-                else:
-                    w="cedula de identidad:"
-                    cedula=w+" "+validacioncedula()
-                        
-                
-                                        
-        elif(opcion3_int==2):
+        seguro=False
+        for i in range(len(a)):
+            for j in range(len(a[0])):
+                if(cedula==a[i][j-3]):
+                    print(a[i])
+                    pause()
+                    seguro=True
+                    break
+        if(seguro==True):
             break
-            pause()
-        else:
-            print("ingrese una de las opciones disponibles")
-            pause()
-        
+def modificarficha(a,cedula):
+    while True:
+        seguro=False
+        for i in range(len(a)):
+            for j in range(len(a[0])):
+                if(cedula==a[i][j-3]):
+                    print(a[i])
+                    a[i][4]=enfermedades()
+                    k=a[i][4]
+                    a[i][5]=tratamiento(k)
+                    print(a[i])
+                    seguro=True
+                    break
+                    pause()
+        if(seguro==True):
+            break
+def eliminarficha(a,cedula):
+    while True:
+        seguro=False
+        for i in range(len(a)):
+            for j in range(len(a[0])):
+                if(cedula==a[i][j-3]):
+                    print(a[i])
+                    a.pop(i)
+                    print(a)
+                    pause()
+                    seguro=True
+                    break
+        if(seguro==True):
+            break    
 def ingresoelemento():
     while True:
         while True:
@@ -110,10 +86,12 @@ def ingresoelemento():
                 if(opcion4_int>0):
                     break
                 else:
-                    print("ingrese un numero mayor a 0")
+                    init()
+                    print(Style.BRIGHT+Fore.RED+"ingrese un numero mayor a 0"+Style.RESET_ALL)
                     pause()
             else:
-                print("ingrese una opcion valida")
+                init()
+                print(Style.BRIGHT+Fore.RED+"ingrese una opcion valida"+Style.RESET_ALL)
                 pause()
                 os.system("cls")
         if(opcion4_int==1):
@@ -157,9 +135,11 @@ def ingresoelemento():
                             if(buscar_int<=n):
                                 break
                         else:
-                            print("ingrese un numero mayor a 0")
+                            init()
+                            print(Style.BRIGHT+Fore.RED+"ingrese un numero mayor a 0"+Style.RESET_ALL)
                     else:
-                        print("ingrese un identificador valido")
+                        init()
+                        print(Style.BRIGHT+Fore.RED+"ingrese una opcion valida"+Style.RESET_ALL)
                         pause()
                         os.system("cls")
                 for i in range(len(a)):
@@ -174,7 +154,8 @@ def ingresoelemento():
                                     if(desicion4<=2):
                                         break
                                 else:
-                                    print("ingrese una de las opciones disponibles")
+                                    init()
+                                    print(Style.BRIGHT+Fore.RED+"ingrese una de las opciones disponibles"+Style.RESET_ALL)
                                     pause()
                                     os.system("clear")
                             if(desicion4==1):
@@ -199,7 +180,8 @@ def ingresoelemento():
         elif(opcion4_int==3):
             break
         else:
-            print("ingrese una de las opciones disponibles")
+            init()
+            print(Style.BRIGHT+Fore.RED+"ingrese una de las opciones disponibles"+Style.RESET_ALL)
     return a
 def matrizfactura(g):
     acu=0
@@ -234,9 +216,11 @@ def matrizfactura(g):
                     if(b<1):
                         break
                     else:
-                        print("ingrese un numero del 1 al 100")
+                        init()
+                        print(Style.BRIGHT+Fore.RED+"ingrese un numero del 1 al 100"+Style.RESET_ALL)
                 else:
-                    print("ingrese un numero positivo")
+                    init()
+                    print(Style.BRIGHT+Fore.RED+"ingrese un numero positivo"+Style.RESET_ALL)
             c="costo:"
             q=z+b
             p=c+str(q)
@@ -261,7 +245,8 @@ def validacionalfabetica2(nombre):
         if(dato.isalpha()==True):
             break
         else:
-            print("ingrese un dato valido")
+            init()
+            print(Style.BRIGHT+Fore.RED+"ingrese una opcion valida"+Style.RESET_ALL)
             pause()
             os.system("cls")
     return dato
@@ -273,7 +258,8 @@ def validacionalfabetica(nombre):
         if(dato.isalpha()==True):
             break
         else:
-            print("ingrese un dato valido")
+            init()
+            print(Style.BRIGHT+Fore.RED+"ingrese una opcion valida"+Style.RESET_ALL)
             pause()
             os.system("cls")
     return dato
@@ -285,25 +271,29 @@ def validaciongenero(nombre):
             if(dato=="masculino" or dato=="femenino"):
                 break
             else:
-                print("ingrese masculino o femenino")
+                init()
+                print(Style.BRIGHT+Fore.RED+"ingrese masculino o femenino"+Style.RESET_ALL)
                 pause()
         else:
-            print("ingrese un dato valido")
+            init()
+            print(Style.BRIGHT+Fore.RED+"ingrese una opcion valida"+Style.RESET_ALL)
             pause()
             os.system("cls")
     return dato
 def validaciondesicion(nombre):
     while True:
         print("¿cual es su",nombre,"?")
-        dato=input("ingrese el dato pedido aqui:")
+        dato=input()
         if(dato.isdigit()==True):
             dato_int=int(dato)
             if(dato_int>0):
                 break
             else:
-                print("ingrese un numero mayor a 0")
-        else:
-            print("ingrese un dato valido")
+                init()
+                print(Style.BRIGHT+Fore.RED+"ingrese un numero mayor a 0"+Style.RESET_ALL)
+        elif(dato.isdigit()==False):
+            init()
+            print(Style.BRIGHT+Fore.RED+"ingrese una opcion valida"+Style.RESET_ALL)
             pause()
             os.system("cls")
     return dato_int
@@ -317,7 +307,8 @@ def validacionnumerica2(nombre):
             if(dato_int>0):
                 break
         else:
-            print("ingrese un dato valido")
+            init()
+            print(Style.BRIGHT+Fore.RED+"ingrese una opcion valida"+Style.RESET_ALL)
             pause()
             os.system("cls")
     return dato_int
@@ -331,7 +322,8 @@ def validacionnumerica(nombre):
             if(dato_int>0):
                 break
         else:
-            print("ingrese un dato valido")
+            init()
+            print(Style.BRIGHT+Fore.RED+"ingrese una opcion valida"+Style.RESET_ALL)
             pause()
             os.system("cls")
     return dato_int
@@ -343,9 +335,11 @@ def validacioncedula():
             if(len(dato)==10):
                 break
             else:
-                print("ingrese una cedula de 10 digitos")
+                init()
+                print(Style.BRIGHT+Fore.RED+"ingrese una cedula de 10 digitos"+Style.RESET_ALL)
         else:
-            print("ingrese una cedula valida")
+            init()
+            print(Style.BRIGHT+Fore.RED+"ingrese una opcion valida"+Style.RESET_ALL)
             pause()
             os.system("cls")
     return dato
@@ -356,6 +350,7 @@ def listamateriales():
         for j in range(len(s[0])):
             print(s[i][j])
         print("\n")
+    pause()
     while True:
         buscar=input("ingrese un numero entre la lista mostrada:")
         if(buscar.isdigit()==True):
@@ -364,10 +359,12 @@ def listamateriales():
                 if(buscar_int<=6):
                     break
                 else:
-                    print("ingrese un numero entre  1 y 6")
+                    init()
+                    print(Style.BRIGHT+Fore.RED+"ingrese un numero entre  1 y 6"+Style.RESET_ALL)
                     pause()
             else:
-                print("ingrese un numero valido")
+                init()
+                print(Style.BRIGHT+Fore.RED+"ingrese una opcion valida"+Style.RESET_ALL)
                 pause()
                 os.system("cls")
     seguro=False
@@ -396,7 +393,8 @@ def enfermedades():
         if(desicion5>0 and desicion5<=2):
             break
         else:
-            print("ingrese 1 o 2")
+            init()
+            print(Style.BRIGHT+Fore.RED+"ingrese 1 o 2"+Style.RESET_ALL)
             pause()
     if(desicion5==1):
         while True:
@@ -406,10 +404,12 @@ def enfermedades():
                 if(buscar_int>0 and buscar_int<=5):
                     break
                 else:
-                    print("ingrese un numero entre  1 y 5")
+                    init()
+                    print(Style.BRIGHT+Fore.RED+"ingrese un numero entre  1 y 5"+Style.RESET_ALL)
                     pause()
             else:
-                print("ingrese un numero valido")
+                init()
+                print(Style.BRIGHT+Fore.RED+"ingrese una opcion valida"+Style.RESET_ALL)
                 pause()
                 os.system("cls")
         for i in range(len(s)):
@@ -440,7 +440,8 @@ def tratamiento(enfermedad):
                         if(gravedad<=3):
                             break
                         else:
-                            print("ingrese 1, 2 o 3")
+                            init()
+                            print(Style.BRIGHT+Fore.RED+"ingrese 1, 2 o 3"+Style.RESET_ALL)
                             pause()
                             os.system("cls")
                     if(gravedad==1):
@@ -460,7 +461,8 @@ def tratamiento(enfermedad):
                             if(respuesta<=2):
                                 break
                             else:
-                                print("ingrese 1 o 2")
+                                init()
+                                print(Style.BRIGHT+Fore.RED+"ingrese 1 o 2"+Style.RESET_ALL)
                                 pause()
                                 os.system("cls")
                     if(respuesta==1):
@@ -478,7 +480,8 @@ def tratamiento(enfermedad):
                             if(respuesta<=2):
                                 break
                             else:
-                                print("ingrese 1 o 2")
+                                init()
+                                print(Style.BRIGHT+Fore.RED+"ingrese 1 o 2"+Style.RESET_ALL)
                                 pause()
                                 os.system("cls")
                             
@@ -491,7 +494,8 @@ def tratamiento(enfermedad):
                                 if(respuesta2<4):
                                     break
                                 else:
-                                    print("ingrese 1, 2 o 3")
+                                    init()
+                                    print(Style.BRIGHT+Fore.RED+"ingrese 1, 2 o 3"+Style.RESET_ALL)
                                     pause()
                                     os.system("cls")
                                 
@@ -516,7 +520,8 @@ def tratamiento(enfermedad):
                             if(respuesta<=2):
                                 break
                             else:
-                                print("ingrese si o no")
+                                init()
+                                print(Style.BRIGHT+Fore.RED+"ingrese 1 o 2"+Style.RESET_ALL)
                                 pause()
                                 os.system("cls")
                     if(respuesta==1):
@@ -544,77 +549,114 @@ while True:
             opcion_int=int(opcion)
             if(opcion_int>0):
                 break
+            else:
+                init()
+                print(Style.BRIGHT+Fore.RED+"ingrese un numero mayor a 0"+Style.RESET_ALL)
         else:
-            print("ingrese un dato valido")
+            init()
+            print(Style.BRIGHT+Fore.RED+"ingrese una opcion valida"+Style.RESET_ALL)
             pause()
             os.system("cls")
             
     if (opcion_int==1):
-        n=10
-        m=6
-        s=1
-        a=[]
-        for i in range(n):
-            a.append([])
-            for j in range(m):
-                if(s==1):
-                    q="un nombre"
-                    g=validacionalfabetica(q)
-                    q="un apellido"
-                    x=validacionalfabetica(q)
-                    w="nombre y apellido:"
-                    p=w+g+" "+x #--->esto concantena los strings, esto equivale a los comandos de: strcat(cad0," ");strcat(cad0,cad1);#
-                if(s==2):
-                    q="una edad"
-                    w="edad:"
-                    p=w+" "+str(validacionnumerica(q))
-                if(s==3):
-                    q="un genero,(masculino o femenino),"
-                    w="genero:"
-                    p=w+" "+validaciongenero(q)
-                if(s==4):
-                    w="cedula de identidad:"
-                    p=w+" "+validacioncedula()
-                if(s==5):
-                    w="diagnostico:"
-                    x=enfermedades()
-                    p=w+" "+x
-                z=x
-                if(s==6):
-                    w="tratamiento:"
-                    c=tratamiento(z)
-                    p=w+" "+c
-                a[i].append(p)
-                s=s+1
-            print(a)
-            pause()
-            s=1
-            print("si quiere ingresar otra ficha presiones cualquier boton\ncaso contrario presione 1")
-            q="desicion"
-            desicion=validaciondesicion(q)
-            if(desicion==1):
-                break
-        A=a
-        
         while True:
-            print("Si desea modificar algo de la matriz presione 1\ncaso contrario presione 2")
-            q="desicion"
-            desicion8=validaciondesicion(q)
-            if(desicion8==1):
+            while True:
+                print("ingrese 1 para ingresar una nueva ficha\ningrese 2 para modificar una ficha\ningrese 3 para eliminar una ficha\ningrese 4 para imprimir un fichar\ningrese 5 para volver al menu principal\n")
+                opcion9=input("ingrese su opcion:")
+                if(opcion9.isdigit()==True):
+                    opcion9_int=int(opcion9)
+                    if(opcion9_int>0 and opcion9_int<=5):
+                        break
+                    else:
+                        init()
+                        print(Style.BRIGHT+Fore.RED+"ingrese un numero entre 1 y 5"+Style.RESET_ALL)
+                else:
+                    init()
+                    print(Style.BRIGHT+Fore.RED+"ingrese una opcion valida"+Style.RESET_ALL)
+                    pause()
+                    os.system("cls")
+            if(opcion9_int==1):
+                n=10
+                m=6
+                s=1
+                a=[]
+                for i in range(n):
+                    a.append([])
+                    for j in range(m):
+                        if(s==1):
+                            q="un nombre"
+                            g=validacionalfabetica(q)
+                            q="un apellido"
+                            x=validacionalfabetica(q)
+                            w="nombre y apellido:"
+                            p=w+g+" "+x #--->esto concantena los strings, esto equivale a los comandos de: strcat(cad0," ");strcat(cad0,cad1);#
+                        if(s==2):
+                            q="una edad"
+                            w="edad:"
+                            p=w+" "+str(validacionnumerica(q))
+                        if(s==3):
+                            q="un genero,(masculino o femenino),"
+                            w="genero:"
+                            p=w+" "+validaciongenero(q)
+                        if(s==4):
+                            w="cedula de identidad:"
+                            p=w+" "+validacioncedula()
+                        if(s==5):
+                            w="diagnostico:"
+                            x=enfermedades()
+                            p=w+" "+x
+                        z=x
+                        if(s==6):
+                            w="tratamiento:"
+                            c=tratamiento(z)
+                            p=w+" "+c
+                        a[i].append(p)
+                        s=s+1
+                    print(a)
+                    pause()
+                    s=1
+                    print("si quiere ingresar otra ficha presiones cualquier boton\ncaso contrario presione 1")
+                    q="desicion"
+                    desicion=validaciondesicion(q)
+                    if(desicion==1):
+                        break
+                A=a
+            if(opcion9_int==2):
                 w="cedula de identidad:"
                 buscar=w+" "+validacioncedula()
                 seguro=False
                 for i in range(len(A)):
                     if(buscar==A[i][3]):
-                        A=ingresomatrizpacientes(A,buscar)
+                        modificarficha(A,buscar)
                         seguro=True
                     if(seguro==True):
                         break
+            if(opcion9_int==3):   
+                w="cedula de identidad:"
+                buscar=w+" "+validacioncedula()
+                seguro=False
+                for i in range(len(A)):
+                    if(buscar==A[i][3]):
+                        eliminarficha(A,buscar)
+                        seguro=True
+                    if(seguro==True):
+                        break
+            elif(opcion9_int==4):
+                w="cedula de identidad:"
+                buscar=w+" "+validacioncedula()
+                seguro=False
+                for i in range(len(A)):
+                    if(buscar==A[i][3]):
+                        busquedaficha(A,buscar)
+                        seguro=True
+                    if(seguro==True):
+                        break
+            elif(opcion9_int==5):
                 break
-            elif(desicion8==2):
-                break
-            else:
-                print("ingrese una de las opciones disponibles")
+            elif(opcion9_int>5):
+                init()
+                print(Style.BRIGHT+Fore.RED+"ingrese una de las opciones disponibles\n"+Style.RESET_ALL)
+                pause()
     elif (opcion_int==2):
         inventario(opcion_int)
     elif (opcion_int==3):
@@ -625,5 +667,6 @@ while True:
     elif(opcion_int==5):
         break
     else:
-        print("ingrese una de las  opciones disponibles")
+        init()
+        print(Style.BRIGHT+Fore.RED+"ingrese una de las  opciones disponibles"+Style.RESET_ALL)
         pause()
