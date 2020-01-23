@@ -47,10 +47,13 @@ def calendario(opcion):
                 pause()
                 os.system("cls")
                 seguro=True
+                pause()
             else:
                 print(Style.BRIGHT+Fore.RED+"ingrese un numero del 1 al 12"+Style.RESET_ALL)
+                pause()
         else:
             print(Style.BRIGHT+Fore.RED+"ingrese un dígito"+Style.RESET_ALL)
+            pause()
 
 def busquedaficha(a,cedula):
     while True:
