@@ -647,11 +647,11 @@ while True:
         opcion=input("ingrese su opcion:")
         if(opcion.isdigit()==True):
             opcion_int=int(opcion)
-            if(opcion_int>0):
+            if(opcion_int>0 and opcion_int<=5):
                 break
             else:
                 init()
-                print(Style.BRIGHT+Fore.RED+"ingrese un numero mayor a 0"+Style.RESET_ALL)
+                print(Style.BRIGHT+Fore.RED+"ingrese un numero mayor entre 1 y 5"+Style.RESET_ALL)
         else:
             init()
             print(Style.BRIGHT+Fore.RED+"ingrese una opcion valida"+Style.RESET_ALL)
