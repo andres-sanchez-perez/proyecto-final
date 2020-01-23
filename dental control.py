@@ -35,12 +35,22 @@ def facturacion(opcion,A):
             pause()
 
 def calendario(opcion):
-    F=int(input("ingrese el mes que quiere mostrar"))
-    os.system("cls")
-    cal = calendar.month(2020,F)
-    print(Style.BRIGHT+"Aquí está el calendario:", cal)
-    pause()
-    os.system("cls")
+    while True:
+        seguro=False
+        F=input("ingrese el mes que quiere mostrar")
+        if(F.isdigit()==True):
+            F_int=int(F)
+            if(F_int>=1 and F_int<=12):
+                os.system("cls")
+                cal = calendar.month(2020,F_int)
+                print(Style.BRIGHT+"Aquí está el calendario:", cal)
+                pause()
+                os.system("cls")
+                seguro=True
+            else:
+                print(Style.BRIGHT+Fore.RED+"ingrese un numero del 1 al 12"+Style.RESET_ALL)
+        else:
+            print(Style.BRIGHT+Fore.RED+"ingrese un dígito"+Style.RESET_ALL)
 
 def busquedaficha(a,cedula):
     while True:
@@ -53,6 +63,8 @@ def busquedaficha(a,cedula):
                     os.system("cls")
                     seguro=True
                     break
+            if(seguro==True):
+                break
         if(seguro==True):
             break
 def modificarficha(a,cedula):
