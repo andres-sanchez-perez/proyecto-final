@@ -36,7 +36,6 @@ def facturacion(opcion,A):
 
 def calendario(opcion):
     while True:
-        seguro=False
         F=input("ingrese el mes que quiere mostrar")
         if(F.isdigit()==True):
             F_int=int(F)
@@ -46,14 +45,19 @@ def calendario(opcion):
                 print(Style.BRIGHT+"Aquí está el calendario:", cal)
                 pause()
                 os.system("cls")
-                seguro=True
                 pause()
             else:
                 print(Style.BRIGHT+Fore.RED+"ingrese un numero del 1 al 12"+Style.RESET_ALL)
                 pause()
-        else:
-            print(Style.BRIGHT+Fore.RED+"ingrese un dígito"+Style.RESET_ALL)
-            pause()
+        print(Style.BRIGHT+Fore.RED+"Si quiere ingresar otro mes presione 1\nCaso contrario presione 2"+Style.RESET_ALL)
+        q="desicion"
+        desicion6=validaciondesicion(q)
+        if(desicion6==1):
+            break
+            os.system("cls")
+        elif(desicion6>2):
+            print(Style.BRIGHT+Fore.RED+"Ingrese 1 o 2"+Style.RESET_ALL)
+            os.system("cls")
 
 def busquedaficha(a,cedula):
     while True:
@@ -725,7 +729,7 @@ while True:
                     pause()
                     s=1
                     os.system("cls")
-                    print(Style.BRIGHT+"si quiere ingresar otra ficha presiones cualquier boton\ncaso contrario presione 1")
+                    print(Style.BRIGHT+Fore.YELLOW+"si quiere ingresar otra ficha presiones cualquier boton\ncaso contrario presione 1")
                     q="desicion"
                     desicion=validaciondesicion(q)
                     if(desicion==1):
@@ -788,3 +792,4 @@ while True:
         print(Style.BRIGHT+Fore.RED+"ingrese una de las  opciones disponibles"+Style.RESET_ALL)
         os.system("cls")
         pause()
+
