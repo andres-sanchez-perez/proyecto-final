@@ -15,12 +15,12 @@ def facturacion(opcion,A):
             opcion5=input("ingrese su opcion:")
             if(opcion5.isdigit()==True):
                 opcion5_int=int(opcion5)
-                if(opcion5_int>0):
+                if(opcion5_int>0 and opcion5_int<=2):
                     os.system("cls")
                     break
                 else:
                     init()
-                    print(Style.BRIGHT+Fore.RED+"ingrese un numero mayor a 0"+Style.RESET_ALL)
+                    print(Style.BRIGHT+Fore.RED+"ingrese 1 o 2"+Style.RESET_ALL)
                     pause()
                     os.system("cls")
         if (opcion5_int==1):
