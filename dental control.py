@@ -147,12 +147,12 @@ def ingresoelemento():
             os.system("cls")
             if(opcion4.isdigit()==True):
                 opcion4_int=int(opcion4)
-                if(opcion4_int>0):
+                if(opcion4_int>0 and opcion4_int<=4):
                     os.system("cls")
                     break
                 else:
                     init()
-                    print(Style.BRIGHT+Fore.RED+"ingrese un numero mayor a 0"+Style.RESET_ALL)
+                    print(Style.BRIGHT+Fore.RED+"ingrese un numero del 1 al 4"+Style.RESET_ALL)
                     pause()
                     os.system("cls")
             else:
@@ -792,4 +792,3 @@ while True:
         print(Style.BRIGHT+Fore.RED+"ingrese una de las  opciones disponibles"+Style.RESET_ALL)
         os.system("cls")
         pause()
-
